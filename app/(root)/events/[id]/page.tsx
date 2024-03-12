@@ -9,6 +9,7 @@ const EventDetails = async ({ params: { id }}: SearchParamProps) => {
 
     
   return (
+    <>
     <section className='flex justify-center bg-primary-50 bg-dotted-pattern bg-contain'>
         <div className='grid grid-cols-1 md:grid-cols-2 2xl:max-w-7xl'>
             <Image 
@@ -68,6 +69,11 @@ const EventDetails = async ({ params: { id }}: SearchParamProps) => {
             </div>
         </div>
     </section>
+
+    <section className='wrapper my-8 flex flex-col gap-8 md:gap-12'>
+
+    </section>
+    </>
   )
 }
 

@@ -4,6 +4,7 @@ import { auth } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { DeleteConfirmation } from './DeleteConfirmation'
 
 type CardProps = {
     event: IEvent,
@@ -32,6 +33,8 @@ const Card = ({event, hasOrderLink, hidePrice}:CardProps) => {
                   <Link href={`/events/${event._id}/update`}>
                       <Image src="/assets/icons/edit.svg" alt="edit" width={20} height={20} />
                   </Link>
+                <DeleteConfirmation eventId={event._id}/>
+
               </div>
           )}
 
@@ -41,7 +44,7 @@ const Card = ({event, hasOrderLink, hidePrice}:CardProps) => {
             >
                 {!hidePrice && <div className='flex gap-2'>
                     <span className='p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60'>{event.isFree ? 'FREE' : `${event.price}`}</span>
-                    <p className='p-semibold-14 w-min rounded-full bg-green-500/10 px-4 py-1 text-grey-500'>{event.category.name}</p>
+                    <p className='p-semibold-14 w-min rounded-full bg-green-500/10 px-4 py-1 text-grey-500 line-clamp-1'>{event.category.name}</p>
                 </div>}
                 <p className='p-medium-16 p-medium-18 text-grey-500'>
                     {formatDateTime(event.startDateTime).dateTime}
