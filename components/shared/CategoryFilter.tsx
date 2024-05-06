@@ -30,30 +30,23 @@ const CategoryFilter = () => {
         getCategories()
     }, [])
 
-    // useEffect(() => {
-    //     const delayDebounceFn = setTimeout(() => {
-    //         let newUrl = ''
-    //         if(categories){
-    //             newUrl = formUrlQuery({
-    //                 params: searchParams.toString(),
-    //                 key: 'query',
-    //                 value: categories
-    //             })
-    //         } else {
-    //             newUrl = removeKeysFromQuery({
-    //                 params: searchParams.toString(),
-    //                 keysToRemove: ['query'],
-    //             })
-    //         }
-
-    //         router.push(newUrl, { scroll: false})
-    //     }, 300)
-
-    //     return () => clearTimeout(delayDebounceFn)
-    // }, [categories, searchParams, router])
 
     const onSelectCategory = (category: string) => {
+        let newUrl = ''
+        if(category && category !== 'All') {
+            newUrl = formUrlQuery({
+                params: searchParams.toString(),
+                key: 'category',
+                value: category
+            })
+        } else {
+            newUrl = removeKeysFromQuery({
+                params: searchParams.toString(),
+                keysToRemove: ['category'],
+            })
+        }
 
+        router.push(newUrl, { scroll: false})
     }
 
     return (
@@ -63,6 +56,11 @@ const CategoryFilter = () => {
             </SelectTrigger>
             <SelectContent>
                 <SelectItem value="All" className="select-item p-regular-14">All</SelectItem>
+                {categories.map((category) => (
+                    <SelectItem value={category.name} key={category._id} className="select-item p-regular-14">
+                        {category.name}
+                    </SelectItem>
+                ))}
             </SelectContent>
         </Select>
     )
